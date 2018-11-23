@@ -28,7 +28,7 @@ public class ExtArrayList {
     }
 
     public void add(Object object){
-        //1、判断实际存放的数据容量是否大于elementData
+        //1、判断实际存放的数据容量是否等于elementData数组长度
         if (size == elementData.length){
             //新数组容量大小
             int newCapaCity = 2 * size;
@@ -42,4 +42,15 @@ public class ExtArrayList {
         //2、使用下标进行赋值
         elementData[size++] = object;
     }
+
+    public Object get(int index){
+        rangeCheck(index);
+        return elementData[index];
+    }
+
+    private void rangeCheck(int index){
+        if(index >= size)
+            throw new IndexOutOfBoundsException("索引越界异常");
+    }
+
 }
