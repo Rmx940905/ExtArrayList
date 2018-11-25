@@ -5,10 +5,10 @@ import cn.itcast.ext.arraylist.ExtList;
 
 public class Test002 {
     public static void main(String[] args) {
-        ExtList<String> list =  new ExtArrayList<>();
+        ExtList list =  new ExtArrayList();
         list.add("a");
         list.add("b");
-        list.add("c");
+        list.add(1);
         list.add("d");
         list.add("e");
         list.add("f");
