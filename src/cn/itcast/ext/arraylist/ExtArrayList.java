@@ -5,7 +5,7 @@ import java.util.Arrays;
 /*
     自定义ArrayList集合
  */
-public class ExtArrayList {
+public class ExtArrayList<E> implements ExtList<E>{
 
     //ArrayList底层采用数组存放
     private Object [] elementData;
@@ -31,20 +31,20 @@ public class ExtArrayList {
 
 
     //线程安全问题ArrayList底层每次扩容是以1.5倍
-    public void add(Object object){
+    public void add(E e){
         //1、判断实际存放的数据容量是否等于elementData数组长度
         ensureExolicitCapaCity(size+1);
         //2、使用下标进行赋值
-        elementData[size++] = object;
+        elementData[size++] = e;
     }
 
     //将元素存入指定位置
-    public void add(int index, Object object){
+    public void add(int index, E e){
         rangeCheck(index);
         ensureExolicitCapaCity(size+1);
         int numMoved = size - index;
         System.arraycopy(elementData,index,elementData,index+1,numMoved);
-        elementData[index]  =  object;
+        elementData[index]  =  e;
         size++;
     }
 
@@ -63,9 +63,9 @@ public class ExtArrayList {
     }
 
     //获取元素
-    public Object get(int index){
+    public E get(int index){
         rangeCheck(index);
-        return elementData[index];
+        return (E) elementData[index];
     }
 
     //检查索引是否越界
@@ -80,9 +80,9 @@ public class ExtArrayList {
     }
 
     //通过索引删除
-    public Object remove(int index){
+    public int remove(int index){
         //使用下标查询该值是否存在
-        Object object = get(index);
+        Object e = get(index);
         //计算删除元素后面的长度
         int numMoved  = size - index - 1;
         //删除原理 使用arraycopy往前移动数据，将最后一个变为空
@@ -95,10 +95,10 @@ public class ExtArrayList {
     }
 
     //通过对象删除  删除元素相同时只会删除第一个
-    public boolean remove(Object object){
+    public boolean remove(E e){
         for (int i = 0; i<elementData.length; i++){
             Object value = elementData[i];
-            if(value.equals(object)){
+            if(value.equals(e)){
                 remove(i);
                 return true;
             }
